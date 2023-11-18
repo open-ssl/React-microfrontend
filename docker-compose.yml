@@ -5,8 +5,6 @@ services:
     build: ./frontend
     container_name: microfrontend-frontend
     command: serve -s build -l 3000
-    ports:
-      - "3000:3000"
     restart: unless-stopped
     
 
@@ -21,6 +19,7 @@ services:
       - PORT=3001
       - HOST=stas.com
       - MONGO_URL=mongodb://api_db:27017/api
+      - AUTH_API_URL=http://auth:3002/api
     depends_on:
       - api_db
   auth:
@@ -48,6 +47,16 @@ services:
     image: mongo:latest
     volumes:
       - mongodb_auth:/data/db
+  
+  nginx:
+    container_name: microfrontend-nginx
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - frontend
 
 volumes:
   mongodb_api:
