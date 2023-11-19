@@ -20,13 +20,19 @@ app.get("/test", (req, res) => {
 });
 
 app.get("/test_user", (req, res) => {
-  // console.log('authApiUrl', authApiUrl);
   axios.get(authApiUrl + "/currentUser").then(response => {
     res.json({
       dataForTestUser:  true,
       data:  response.data,
     });  
   })
+});
+
+app.get("/api/test_data", (req, res) => {
+  res.json({
+    testDataStatus: true,
+    testDataValue: 17,
+  })  
 });
 
 connectDb()
