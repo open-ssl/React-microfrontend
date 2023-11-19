@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { response } = require("express");
 const express = require("express");
-const { db, port, host, apiUrl } = require("./configuration");
+const { db, port, apiUrl } = require("./configuration");
 const { connectDb } = require("./helpers/db");
 
 const app = express();
@@ -9,7 +9,6 @@ const app = express();
 const startServer = () => {
   app.listen(port, () => {
     console.log(`Started auth service on port ${port}`);
-    console.log(`Our host ${host}`);
     console.log(`Our database ${db}`);
   });
 };

@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const axios = require("axios");
-const { db, port, host, authApiUrl } = require("./configuration");
+const { db, port, authApiUrl } = require("./configuration");
 const { connectDb } = require("./helpers/db");
 const { response } = require("express");
 
@@ -10,7 +10,6 @@ const app = express();
 const startServer = () => {
   app.listen(port, () => {
     console.log(`Started api service on port ${port}`);
-    console.log(`Our host ${host}`);
     console.log(`Our database ${db}`);
   });
 };
